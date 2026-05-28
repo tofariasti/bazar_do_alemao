@@ -1,0 +1,23 @@
+[
+  {
+    "id": "oferta-1",
+    "titulo": "Utilidades para casa",
+    "descricao": "Variedades com preço de bazar — peça fotos e valores pelo WhatsApp.",
+    "imagem": "assets/images/instagram/post-1.jpg",
+    "intent": "oferta-utilidades"
+  },
+  {
+    "id": "oferta-2",
+    "titulo": "Decoração e presentes",
+    "descricao": "Novidades da semana na loja e nos stories do Instagram.",
+    "imagem": "assets/images/instagram/post-3.jpg",
+    "intent": "oferta-decoracao"
+  },
+  {
+    "id": "oferta-3",
+    "titulo": "Brinquedos e infantil",
+    "descricao": "Opções para todas as idades. Consulte disponibilidade antes de ir.",
+    "imagem": "assets/images/instagram/post-5.jpg",
+    "intent": "oferta-brinquedos"
+  }
+]

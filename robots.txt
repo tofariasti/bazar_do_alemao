@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bazar-do-alemao.netlify.app/sitemap.xml
