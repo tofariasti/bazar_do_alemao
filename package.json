@@ -1,0 +1,11 @@
+{
+  "name": "bazar-do-alemao",
+  "version": "1.0.0",
+  "description": "Landing page Bazar Do Alemão — Porto Alegre/RS",
+  "scripts": {
+    "capture:marketing": "node scripts/capture-marketing-screenshots.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.36.1"
+  }
+}

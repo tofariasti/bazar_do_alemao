@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bazar-do-alemao.netlify.app/sitemap.xml
+Sitemap: https://tofariasti.github.io/bazar_do_alemao/sitemap.xml

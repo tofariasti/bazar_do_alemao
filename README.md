@@ -2,6 +2,28 @@
 
 Landing page estática para o [Bazar Do Alemão](https://www.instagram.com/bazar_doalemao/) (@bazar_doalemao), São Sebastião, Porto Alegre.
 
+**Demo online:** [tofariasti.github.io/bazar_do_alemao](https://tofariasti.github.io/bazar_do_alemao/)
+
+**Site (tela cheia):** [tofariasti.github.io/bazar_do_alemao/site/](https://tofariasti.github.io/bazar_do_alemao/site/)
+
+## Pré-visualização
+
+| Mobile | Desktop | Demo com moldura |
+|:------:|:-------:|:----------------:|
+| ![Hero mobile](docs/marketing/01-hero-mobile.png) | ![Hero desktop](docs/marketing/02-hero-desktop.png) | ![Demo com moldura](docs/marketing/07-demo-moldura.png) |
+
+| Ofertas | Depoimentos | Localização | Instagram |
+|:-------:|:-----------:|:-----------:|:---------:|
+| ![Ofertas](docs/marketing/03-ofertas.png) | ![Depoimentos](docs/marketing/04-depoimentos.png) | ![Localização](docs/marketing/05-localizacao.png) | ![Instagram](docs/marketing/06-instagram.png) |
+
+### Regenerar os prints
+
+```bash
+python3 -m http.server 8080 &
+npm install
+npm run capture:marketing
+```
+
 ## Rodar localmente
 
 ```bash
@@ -9,7 +31,7 @@ cd bazar_do_alemao
 python3 -m http.server 8080
 ```
 
-Abra [http://localhost:8080](http://localhost:8080).
+Abra [http://localhost:8080](http://localhost:8080) (demo com moldura) ou [http://localhost:8080/site/](http://localhost:8080/site/) (site em tela cheia).
 
 ## Dados da loja
 
@@ -40,7 +62,7 @@ Edite os textos em [`assets/depoimentos.json`](assets/depoimentos.json). A seç�
 ## Ofertas, WhatsApp e QR Code
 
 - **Ofertas da semana:** edite [`assets/ofertas.json`](assets/ofertas.json) (título, imagem, texto do WhatsApp).
-- **Mensagens WhatsApp:** edite os textos em [`js/main.js`](js/main.js) (`WHATSAPP_INTENTS`).
+- **Mensagens WhatsApp:** edite os textos em [`site/js/main.js`](site/js/main.js) (`WHATSAPP_INTENTS`).
 - **Link do site / Google:** edite [`assets/site-config.json`](assets/site-config.json) (`siteUrl`, `googleReviewUrl`).
 - **Regenerar QR Code** após mudar a URL do site:
 
@@ -53,45 +75,37 @@ Arquivo gerado: `assets/images/qr-site.png` (imprimir para vitrine).
 
 ## SEO
 
-- **Meta tags e Open Graph** em `index.html` (título, descrição, Twitter Card, geo).
-- **JSON-LD** (`Store` + `LocalBusiness` + `WebSite` + `WebPage`) — URLs absolutas aplicadas via `js/main.js` quando o site roda em HTTP(S).
-- **`assets/site-config.json`:** defina `canonicalUrl` com o domínio final (ex.: `https://bazardoalemao.com.br/`). Enquanto vazio, o canonical usa `/` e, no servidor local, a origem atual.
-- **`robots.txt`** e **`sitemap.xml`:** ao publicar, troque `https://seudominio.com.br/` no sitemap e descomente a linha `Sitemap:` no `robots.txt`.
+- **Meta tags e Open Graph** em `site/index.html` (título, descrição, Twitter Card, geo).
+- **JSON-LD** (`Store` + `LocalBusiness` + `WebSite` + `WebPage`) — URLs absolutas aplicadas via `site/js/main.js` quando o site roda em HTTP(S).
+- **`assets/site-config.json`:** defina `canonicalUrl` com o domínio final (ex.: `https://tofariasti.github.io/bazar_do_alemao/site/`).
+- **`robots.txt`** e **`sitemap.xml`:** atualizados para GitHub Pages.
 - Validar: [Rich Results Test](https://search.google.com/test/rich-results), [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/).
-
-## Checklist antes do deploy
-
-- [x] Galeria com 6 posts recentes em `assets/images/instagram/` (ver atualização abaixo)
-- [x] Logo em `assets/images/logo.png` com fundo transparente (backup em `logo.backup.png`)
-- [x] Meta description, Open Graph, Twitter Card e JSON-LD local
-- [x] Atualizar `canonicalUrl` e `siteUrl` em `assets/site-config.json` e rodar `python3 scripts/generate_qr.py`
-- [x] Atualizar `sitemap.xml` e `robots.txt` com o domínio publicado (`https://bazar-do-alemao.netlify.app/`)
-- [ ] Colar `googleReviewUrl` com link direto de avaliação (Google Meu Negócio), se disponível — use o link “Pedir avaliações” do perfil ou `https://search.google.com/local/writereview?placeid=...`
-- [ ] Validar pin no Google Maps com o endereço exato
-- [ ] Atualizar contagem de seguidores no hero, se necessário
 
 ## Estrutura
 
 ```
-index.html      Página principal + JSON-LD (Store / LocalBusiness)
-robots.txt      Instruções para crawlers
-sitemap.xml     Mapa do site (atualizar URL ao publicar)
-css/styles.css  Estilos mobile-first
-js/main.js      Menu, WhatsApp, status aberto/fechado
-assets/images/  Fotos da loja (a adicionar)
-assets/icons/   favicon.svg
+index.html              Demo com moldura (iframe)
+site/
+  index.html            Página principal + JSON-LD
+  css/styles.css        Estilos mobile-first
+  js/main.js            Menu, WhatsApp, status aberto/fechado
+assets/                 Imagens, JSON, ícones
+assets/css/preview.css  Moldura da demo
+docs/marketing/         Prints para README e WhatsApp
+robots.txt              Instruções para crawlers
+sitemap.xml             Mapa do site
 ```
 
 ## Atualizar fotos do Instagram
 
-As imagens em `assets/images/instagram/` foram baixadas das publicações mais recentes de @bazar_doalemao. Para atualizar no futuro, use a API pública do Instagram (perfil público):
+As imagens em `assets/images/instagram/` foram baixadas das publicações mais recentes de @bazar_doalemao. Para atualizar no futuro:
 
 ```bash
 python3 scripts/download_instagram.py
 ```
 
-Depois atualize os links `/p/SHORTCODE/` em `index.html` conforme `assets/instagram-posts.json`.
+Depois atualize os links `/p/SHORTCODE/` em `site/index.html` conforme `assets/instagram-posts.json`.
 
 ## Deploy
 
-Envie a pasta inteira para qualquer host estático (Netlify, Vercel, GitHub Pages, servidor Apache/Nginx).
+Push na branch `main` publica automaticamente no GitHub Pages via Actions. Também pode enviar a pasta para Netlify, Vercel ou servidor Apache/Nginx.

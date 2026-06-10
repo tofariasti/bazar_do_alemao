@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  var assetUrl = window.assetUrl || function (path) {
+    return path;
+  };
+
   var WHATSAPP_NUMBER = "5551981335930";
 
   var WHATSAPP_INTENTS = {
@@ -142,7 +146,7 @@
       li.innerHTML =
         '<div class="offer-card-media">' +
         '<img src="' +
-        oferta.imagem +
+        assetUrl(oferta.imagem) +
         '" alt="Oferta: ' +
         oferta.titulo +
         '" width="400" height="300" loading="lazy" decoding="async">' +
@@ -371,7 +375,7 @@
     return parts[2] + "/" + parts[1] + "/" + parts[0];
   }
 
-  fetch("assets/catalogo.json")
+  fetch(assetUrl("assets/catalogo.json"))
     .then(function (res) {
       return res.ok ? res.json() : null;
     })
@@ -380,7 +384,7 @@
 
       var download = document.getElementById("catalogo-download");
       if (download && catalogo.arquivo) {
-        download.href = catalogo.arquivo;
+        download.href = assetUrl(catalogo.arquivo);
         if (catalogo.nomeDownload) {
           download.setAttribute("download", catalogo.nomeDownload);
         }
@@ -403,7 +407,7 @@
     })
     .catch(function () {});
 
-  fetch("assets/depoimentos.json")
+  fetch(assetUrl("assets/depoimentos.json"))
     .then(function (res) {
       if (!res.ok) throw new Error("depoimentos");
       return res.json();
@@ -411,7 +415,7 @@
     .then(renderDepoimentos)
     .catch(function () {});
 
-  fetch("assets/ofertas.json")
+  fetch(assetUrl("assets/ofertas.json"))
     .then(function (res) {
       if (!res.ok) throw new Error("ofertas");
       return res.json();
@@ -456,7 +460,7 @@
     var base = resolveSiteBase(config);
     var seo = (config && config.seo) || {};
     var ogImagePath = seo.ogImage || "assets/images/instagram/post-1.jpg";
-    var ogImageAbs = absoluteFromBase(base, ogImagePath);
+    var ogImageAbs = absoluteFromBase(base, assetUrl(ogImagePath));
 
     if (base) {
       var canonical = document.getElementById("seo-canonical");
@@ -511,7 +515,7 @@
   }
 
   var qrCaption = document.getElementById("qr-site-url");
-  fetch("assets/site-config.json")
+  fetch(assetUrl("assets/site-config.json"))
     .then(function (res) {
       return res.ok ? res.json() : null;
     })
