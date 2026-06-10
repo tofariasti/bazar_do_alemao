@@ -245,6 +245,11 @@ body.preview-shell {
   color: #ddd6fe;
 }
 
+.preview-bar__pitch-domain {
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
 @media (min-width: 640px) {
   .preview-bar__pitch {
     display: block;
@@ -252,7 +257,6 @@ body.preview-shell {
 }
 
 @media (max-width: 767px) {
-  .preview-bar__pitch-url,
   .preview-bar__pitch-sep {
     display: none;
   }
